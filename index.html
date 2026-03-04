@@ -301,35 +301,46 @@
   // =========================
   // ★ 新增：確保每個 SVG 都有琥珀 pattern（amberPattern）
   // =========================
- function ensureAmberPattern(svgEl){
+function ensureAmberPattern(svgEl){
   if(!svgEl) return;
 
-  // 如果已經有 pattern 就不要再建
-  // if(svgEl.querySelector("#amberPattern")) return;
-
   let defs = svgEl.querySelector("defs");
-
   if(!defs){
     defs = document.createElementNS("http://www.w3.org/2000/svg","defs");
     svgEl.insertBefore(defs, svgEl.firstChild);
   }
 
-  const pattern = document.createElementNS("http://www.w3.org/2000/svg","pattern");
-  pattern.setAttribute("id","amberPattern");
+  // 1) 找既有 pattern，沒有就建
+  let pattern = svgEl.querySelector("#amberPattern");
+  if(!pattern){
+    pattern = document.createElementNS("http://www.w3.org/2000/svg","pattern");
+    pattern.setAttribute("id","amberPattern");
+    defs.appendChild(pattern);
+  }
+
+  // 2) 讓 pattern 穩定好用（避免單位問題）
   pattern.setAttribute("patternUnits","objectBoundingBox");
+  pattern.setAttribute("patternContentUnits","objectBoundingBox");
   pattern.setAttribute("width","1");
   pattern.setAttribute("height","1");
 
-  const img = document.createElementNS("http://www.w3.org/2000/svg","image");
-  img.setAttribute("href","amber.png");
-  img.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","amber.png");
-   
+  // 3) 找既有 image，沒有就建；有就強制改成 amber.png
+  let img = pattern.querySelector("image");
+  if(!img){
+    img = document.createElementNS("http://www.w3.org/2000/svg","image");
+    pattern.appendChild(img);
+  }
+
+  const src = new URL("amber.png", location.href).href; // 用絕對路徑避免相對路徑坑
+
+  img.setAttribute("href", src);
+  img.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", src);
+
+  img.setAttribute("x","0");
+  img.setAttribute("y","0");
   img.setAttribute("width","1");
   img.setAttribute("height","1");
   img.setAttribute("preserveAspectRatio","xMidYMid slice");
-
-  pattern.appendChild(img);
-  defs.appendChild(pattern);
 }
   // =========================
   // 4) 填色工具：把某個 id 下面可填色元素都改色
