@@ -392,6 +392,7 @@
       document.querySelectorAll("#viewBtns .pill").forEach(btn=>{
         btn.classList.toggle("active", btn.dataset.view === viewKey);
       });
+      updateAll();
     }
 
     document.getElementById("viewBtns").addEventListener("click", (e)=>{
