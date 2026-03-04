@@ -321,7 +321,9 @@
   pattern.setAttribute("height","1");
 
   const img = document.createElementNS("http://www.w3.org/2000/svg","image");
-  img.setAttributeNS(null,"href","amber.png");
+  img.setAttribute("href","amber.png");
+  img.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","amber.png");
+   
   img.setAttribute("width","1");
   img.setAttribute("height","1");
   img.setAttribute("preserveAspectRatio","xMidYMid slice");
