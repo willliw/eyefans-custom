@@ -3,7 +3,7 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1080 1080" enable-background="new 0 0 1080 1080" xml:space="preserve">
 <defs>
-  <pattern id="amberPattern" patternUnits="objectBoundingBox" width="1" height="1">
+  <pattern id="amberPattern" patternUnits="objectBoundingBox" width="400" height="400">
     <image href="amber.png" width="1" height="1" preserveAspectRatio="xMidYMid slice" />
   </pattern>
 </defs>
@@ -271,3 +271,4 @@
 		c1.2,1.84,3.04-4.2,4.32-16.8C888.46,590.99,891.43,503.01,892.64,396.95z"/>
 </g>
 </svg>
+
